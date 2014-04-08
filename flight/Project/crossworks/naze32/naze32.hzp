@@ -180,7 +180,7 @@
       </folder>
       <folder Name="Modules">
         <folder Name="Attitude">
-          <file file_name="flight/targets/naze32/Modules/attitude.c" />
+          <file file_name="flight/Modules/Attitude/naze32/attitude.c" />
         </folder>
         <folder Name="Actuator">
           <file file_name="flight/Modules/Actuator/actuator.c" />
