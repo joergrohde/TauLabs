@@ -73,3 +73,5 @@ androidgcs/gen/
 #local doxygen pages
 /html
 
+*.hzs
+*.bak
