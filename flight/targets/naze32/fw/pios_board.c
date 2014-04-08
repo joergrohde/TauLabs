@@ -105,7 +105,7 @@ static const struct pios_mpu60x0_cfg pios_mpu6050_cfg = {
 #endif /* PIOS_INCLUDE_MPU6050 */
 
 /**
-/* One slot per selectable receiver group.
+ * One slot per selectable receiver group.
  *  eg. PWM, PPM, GCS, DSMMAINPORT, DSMFLEXIPORT, SBUS
  * NOTE: No slot in this map for NONE.
  */

@@ -73,7 +73,7 @@ ALL_BOARDS :=
 include $(ROOT_DIR)/flight/targets/*/target-defs.mk
 
 # OpenPilot GCS build configuration (debug | release)
-GCS_BUILD_CONF ?= debug
+GCS_BUILD_CONF ?= release
 
 ##############################
 #
@@ -274,7 +274,7 @@ endif
 uavobjgenerator:
 	$(V1) mkdir -p $(BUILD_DIR)/ground/$@
 	$(V1) ( cd $(BUILD_DIR)/ground/$@ && \
-	  PYTHON=$(PYTHON) $(QMAKE) $(ROOT_DIR)/ground/uavobjgenerator/uavobjgenerator.pro -spec $(QT_SPEC) -r CONFIG+="debug $(UAVOGEN_SILENT)" && \
+	  PYTHON=$(PYTHON) $(QMAKE) $(ROOT_DIR)/ground/uavobjgenerator/uavobjgenerator.pro -spec $(QT_SPEC) -r CONFIG+="release $(UAVOGEN_SILENT)" && \
 	  $(MAKE) --no-print-directory -w ; \
 	)
 
