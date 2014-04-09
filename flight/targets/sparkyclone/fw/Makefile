@@ -51,11 +51,7 @@ OPTMODULES += VibrationAnalysis
 OPTMODULES += UAVOMavlinkBridge
 OPTMODULES += UAVOLighttelemetryBridge 
 OPTMODULES += Battery
-OPTMODULES += ComUsbBridge
-OPTMODULES += UAVORelay
 OPTMODULES += Airspeed/revolution
-OPTMODULES += UAVOHoTTBridge
-OPTMODULES += UAVOFrSKYSensorHubBridge
 
 # Paths
 OPUAVTALKINC = $(OPUAVTALK)/inc
@@ -151,14 +147,10 @@ SRC += $(PIOSCOMMON)/pios_delay.c
 SRC += $(PIOSCOMMON)/pios_mpu6050.c
 SRC += $(PIOSCOMMON)/pios_mpu9150.c
 SRC += $(PIOSCOMMON)/pios_ms5611.c
-SRC += $(PIOSCOMMON)/pios_etasv3.c
-#SRC += $(PIOSCOMMON)/pios_mpxv5004.c
-#SRC += $(PIOSCOMMON)/pios_mpxv7002.c
+SRC += $(PIOSCOMMON)/pios_hmc5883.c
 SRC += $(PIOSCOMMON)/pios_crc.c
 SRC += $(PIOSCOMMON)/pios_com.c
 SRC += $(PIOSCOMMON)/pios_rcvr.c
-#SRC += $(PIOSCOMMON)/pios_sbus.c
-SRC += $(PIOSCOMMON)/pios_hsum.c
 SRC += $(PIOSCOMMON)/pios_sensors.c
 SRC += $(PIOSCOMMON)/pios_gcsrcvr.c
 SRC += $(PIOSCOMMON)/pios_flash.c

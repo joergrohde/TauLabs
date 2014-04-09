@@ -77,9 +77,6 @@
           <file file_name="flight/targets/naze32/board-info/board-info.mk" />
           <file file_name="flight/targets/naze32/board-info/pios_board.h" />
         </folder>
-        <file file_name="flight/targets/naze32/PiOS/pios_i2c_alt.c">
-          <configuration Name="Common" build_exclude_from_build="Yes" />
-        </file>
       </folder>
       <folder Name="Libraries">
         <file file_name="flight/Libraries/alarms.c" />
@@ -203,7 +200,9 @@
           <file file_name="flight/Modules/Telemetry/telemetry.c" />
         </folder>
         <folder Name="GPS">
-          <file file_name="flight/Modules/GPS/GPS.c" />
+          <file file_name="flight/Modules/GPS/GPS.c">
+            <configuration Name="Common" build_exclude_from_build="Yes" />
+          </file>
           <file file_name="flight/Modules/GPS/NMEA.c" />
           <file file_name="flight/Modules/GPS/UBX.c" />
           <file file_name="flight/Modules/GPS/ubx_cfg.c" />
@@ -262,15 +261,13 @@
           <file file_name="flight/PiOS/STM32F10x/pios_usart.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_irq.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_internal_adc.c">
-            <configuration
-              Name="THUMB Debug"
-              build_exclude_from_build="Yes" />
+            <configuration Name="Common" build_exclude_from_build="Yes" />
           </file>
           <file file_name="flight/PiOS/STM32F10x/pios_servo.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_i2c.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_spi.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_ppm.c" />
-          <file file_name="flight/PiOS/STM32F10x/pios_pwm.c"/>
+          <file file_name="flight/PiOS/STM32F10x/pios_pwm.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_dsm.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_debug.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_gpio.c" />
@@ -295,16 +292,14 @@
           <file file_name="flight/PiOS/Common/pios_ms5611.c" />
           <file file_name="flight/PiOS/Common/pios_mpu6050.c" />
           <file file_name="flight/PiOS/Common/pios_com.c" />
-          <file file_name="flight/PiOS/Common/pios_rcvr.c"/>
+          <file file_name="flight/PiOS/Common/pios_rcvr.c" />
           <file file_name="flight/PiOS/Common/pios_sensors.c" />
           <file file_name="flight/PiOS/Common/pios_gcsrcvr.c" />
           <file file_name="flight/PiOS/Common/printf-stdarg.c">
             <configuration Name="Common" build_exclude_from_build="Yes" />
           </file>
           <file file_name="flight/PiOS/Common/pios_adc.c">
-            <configuration
-              Name="THUMB Debug"
-              build_exclude_from_build="Yes" />
+            <configuration Name="Common" build_exclude_from_build="Yes" />
           </file>
           <file file_name="flight/PiOS/Common/pios_flash.c" />
           <file file_name="flight/PiOS/Common/pios_heap.c" />

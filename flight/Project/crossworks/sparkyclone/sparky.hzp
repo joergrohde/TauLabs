@@ -172,23 +172,11 @@
         <folder Name="Battery">
           <file file_name="flight/Modules/Battery/battery.c" />
         </folder>
-        <folder Name="ComUsbBridge">
-          <file file_name="flight/Modules/ComUsbBridge/ComUsbBridge.c" />
-        </folder>
-        <folder Name="UAVORelay">
-          <file file_name="flight/Modules/UAVORelay/uavorelay.c" />
-        </folder>
         <folder Name="Airspeed">
           <file file_name="flight/Modules/Airspeed/revolution/airspeed.c" />
           <file file_name="flight/Modules/Airspeed/revolution/baro_airspeed_analog.c" />
           <file file_name="flight/Modules/Airspeed/revolution/baro_airspeed_etasv3.c" />
           <file file_name="flight/Modules/Airspeed/revolution/gps_airspeed.c" />
-        </folder>
-        <folder Name="UAVOHoTTBridge">
-          <file file_name="flight/Modules/UAVOHoTTBridge/uavohottbridge.c" />
-        </folder>
-        <folder Name="UAVOFrSKYSensorHubBridge">
-          <file file_name="flight/Modules/UAVOFrSKYSensorHubBridge/UAVOFrSKYSensorHubBridge.c" />
         </folder>
         <folder Name="System">
           <file file_name="flight/Modules/System/systemmod.c" />
@@ -230,10 +218,8 @@
           </folder>
           <file file_name="flight/PiOS/STM32F30x/pios_bl_helper.c" />
           <file file_name="flight/PiOS/STM32F30x/pios_brushless.c" />
-          <file file_name="flight/PiOS/STM32F30x/pios_can.c" />
           <file file_name="flight/PiOS/STM32F30x/pios_debug.c" />
           <file file_name="flight/PiOS/STM32F30x/pios_dma_hooks.c" />
-          <file file_name="flight/PiOS/STM32F30x/pios_dsm.c" />
           <file file_name="flight/PiOS/STM32F30x/pios_exti.c" />
           <file file_name="flight/PiOS/STM32F30x/pios_flash_internal.c" />
           <file file_name="flight/PiOS/STM32F30x/pios_gpio.c" />
@@ -266,11 +252,10 @@
           <file file_name="flight/PiOS/Common/pios_mpu6050.c" />
           <file file_name="flight/PiOS/Common/pios_mpu9150.c" />
           <file file_name="flight/PiOS/Common/pios_ms5611.c" />
+          <file file_name="flight/PiOS/Common/pios_hmc5883.c" />
           <file file_name="flight/PiOS/Common/pios_crc.c" />
           <file file_name="flight/PiOS/Common/pios_com.c" />
           <file file_name="flight/PiOS/Common/pios_rcvr.c" />
-          <file file_name="flight/PiOS/Common/pios_sbus.c" />
-          <file file_name="flight/PiOS/Common/pios_hsum.c" />
           <file file_name="flight/PiOS/Common/pios_sensors.c" />
           <file file_name="flight/PiOS/Common/pios_gcsrcvr.c" />
           <file file_name="flight/PiOS/Common/pios_flash.c" />

@@ -108,24 +108,13 @@ extern uintptr_t pios_com_telem_rf_id;
 extern uintptr_t pios_com_gps_id;
 extern uintptr_t pios_com_bridge_id;
 extern uintptr_t pios_com_mavlink_id;
-extern uintptr_t pios_com_hott_id;
-extern uintptr_t pios_com_frsky_sensor_hub_id;
 extern uintptr_t pios_com_lighttelemetry_id; 
 
 #define PIOS_COM_GPS                    (pios_com_gps_id)
-#define PIOS_COM_TELEM_USB              0
 #define PIOS_COM_TELEM_RF               (pios_com_telem_rf_id)
 #define PIOS_COM_BRIDGE                 (pios_com_bridge_id)
-#define PIOS_COM_VCP                    0
 #define PIOS_COM_MAVLINK                (pios_com_mavlink_id)
-#define PIOS_COM_HOTT                   (pios_com_hott_id)
-#define PIOS_COM_FRSKY_SENSOR_HUB       (pios_com_frsky_sensor_hub_id)
 #define PIOS_COM_LIGHTTELEMETRY         (pios_com_lighttelemetry_id) 
-
-#if defined(PIOS_INCLUDE_DEBUG_CONSOLE)
-extern uintptr_t pios_com_debug_id;
-#define PIOS_COM_DEBUG                  (pios_com_debug_id)
-#endif	/* PIOS_INCLUDE_DEBUG_CONSOLE */
 
 
 
@@ -170,27 +159,6 @@ extern uintptr_t pios_com_debug_id;
 #define PIOS_PPM_NUM_INPUTS				12
 
 //-------------------------
-// Receiver PWM input
-//-------------------------
-#define PIOS_PWM_NUM_INPUTS				10
-
-//-------------------------
-// Receiver DSM input
-//-------------------------
-#define PIOS_DSM_NUM_INPUTS				12
-
-//-------------------------
-// Receiver HSUM input
-//-------------------------
-#define PIOS_HSUM_MAX_DEVS				2
-#define PIOS_HSUM_NUM_INPUTS			32
-
-//-------------------------
-// Receiver S.Bus input
-//-------------------------
-#define PIOS_SBUS_NUM_INPUTS			(16+2)
-
-//-------------------------
 // Servo outputs
 //-------------------------
 #define PIOS_SERVO_UPDATE_HZ			50
@@ -225,11 +193,6 @@ extern uintptr_t pios_internal_adc_id;
 #define PIOS_DMA_MAX_CHANNELS                   12
 #define PIOS_DMA_MAX_HANDLERS_PER_CHANNEL       3
 #define PIOS_DMA_CHANNELS {DMA1_Channel1, DMA1_Channel2, DMA1_Channel3, DMA1_Channel4, DMA1_Channel5, DMA1_Channel6, DMA1_Channel7, DMA2_Channel1, DMA2_Channel2, DMA2_Channel3, DMA2_Channel4, DMA2_Channel5}
-
-//-------------------------
-// USB
-//-------------------------
-#define PIOS_USB_ENABLED				1 /* Should remove all references to this */
 
 #endif /* STM32F30X_SPARKY_H_ */
 

@@ -40,7 +40,6 @@
  
 #define PIOS_INCLUDE_DELAY
 #define PIOS_INCLUDE_I2C
-//#define PIOS_INCLUDE_CAN
 #define WDG_STATS_DIAGNOSTICS
 #define PIOS_INCLUDE_IRQ
 #define PIOS_INCLUDE_LED
@@ -56,13 +55,15 @@
 
 /* Select the sensors to include */
 #define PIOS_INCLUDE_MS5611
-//#define PIOS_INCLUDE_ETASV3
-//#define PIOS_INCLUDE_MPXV5004
-//#define PIOS_INCLUDE_MPXV7002
-//#define PIOS_INCLUDE_MPU6050
-#define PIOS_MPU6050_ACCEL
+#if 0 // mpu6050/ms5611/hmc5883l board
+#define PIOS_INCLUDE_MPU6050
 #define PIOS_MPU6050_SIMPLE_INIT_SEQUENCE
+#define PIOS_INCLUDE_HMC5883
+#else // mpu9150/ms5611 board
 #define PIOS_INCLUDE_MPU9150
+#endif
+#define PIOS_MPU6050_ACCEL  // common to mpu6050/mpu9150
+
 #define FLASH_FREERTOS
 
 /* Com systems to include */
@@ -71,8 +72,6 @@
 #define PIOS_INCLUDE_TELEMETRY_RF
 #define PIOS_INCLUDE_COM_FLEXI
 #define PIOS_INCLUDE_MAVLINK
-#define PIOS_INCLUDE_HOTT
-#define PIOS_INCLUDE_FRSKY_SENSOR_HUB
 //#define PIOS_INCLUDE_LIGHTTELEMETRY 
 
 #define PIOS_INCLUDE_GPS
@@ -81,8 +80,6 @@
 
 /* Supported receiver interfaces */
 #define PIOS_INCLUDE_RCVR
-//#define PIOS_INCLUDE_DSM
-//#define PIOS_INCLUDE_HSUM
 #define PIOS_INCLUDE_PPM
 #define PIOS_INCLUDE_GCSRCVR
 

@@ -52,20 +52,16 @@
 
 /* Supported USART-based PIOS modules */
 #define PIOS_INCLUDE_TELEMETRY_RF
-#define PIOS_INCLUDE_GPS
-#define PIOS_GPS_MINIMAL
-#define PIOS_INCLUDE_GPS_NMEA_PARSER /* Include the NMEA protocol parser */
-#define PIOS_INCLUDE_GPS_UBX_PARSER  /* Include the UBX protocol parser */
+//#define PIOS_INCLUDE_GPS
+//#define PIOS_GPS_MINIMAL
+//#define PIOS_INCLUDE_GPS_NMEA_PARSER /* Include the NMEA protocol parser */
+//#define PIOS_INCLUDE_GPS_UBX_PARSER  /* Include the UBX protocol parser */
 #define PIOS_INCLUDE_MAVLINK
 
 #define PIOS_INCLUDE_SERVO
 //#define PIOS_INCLUDE_SPI
 #define PIOS_INCLUDE_SYS
 #define PIOS_INCLUDE_USART
-//#define PIOS_INCLUDE_USB
-//#define PIOS_INCLUDE_USB_HID
-//#define PIOS_INCLUDE_USB_RCTX
-//#define PIOS_INCLUDE_USB_CDC
 #define PIOS_INCLUDE_COM
 #define PIOS_INCLUDE_FREERTOS
 #define PIOS_INCLUDE_GPIO
@@ -74,16 +70,16 @@
 //#define PIOS_INCLUDE_WDG
 #define PIOS_INCLUDE_BL_HELPER
 
+//#define PIOS_INCLUDE_MS5611
+//#define PIOS_INCLUDE_HMC5883
+#define PIOS_INCLUDE_MPU6050
+#define PIOS_MPU6050_ACCEL
+
 #define PIOS_INCLUDE_LOGFS_SETTINGS
 
 #define PIOS_INCLUDE_FLASH
-#define PIOS_INCLUDE_FLASH_INTERNAL
 #define PIOS_INCLUDE_FLASH_SECTOR_SETTINGS
-
-#define PIOS_INCLUDE_MPU6050
-#define PIOS_MPU6050_ACCEL
-//#define PIOS_INCLUDE_MS5611             // just for testing purpose
-//#define PIOS_INCLUDE_HMC5883            // just for testing purpose
+#define PIOS_INCLUDE_FLASH_INTERNAL
 
 /* Alarm Thresholds */
 #define HEAP_LIMIT_WARNING             220
@@ -94,14 +90,14 @@
 #define CPULOAD_LIMIT_CRITICAL		95
 
 /* Task stack sizes */
-//#define PIOS_ACTUATOR_STACK_SIZE        800   //cc: 800 default:1312
-//#define PIOS_MANUAL_STACK_SIZE          600   //cc: 600 default:1000
-//#define PIOS_SYSTEM_STACK_SIZE          660   //cc: 660 default:924
-//#define PIOS_STABILIZATION_STACK_SIZE   524   //cc: 524 default:724
-#define PIOS_TELEM_STACK_SIZE           624 //cc: 520 default:624?
-#define PIOS_EVENTDISPATCHER_STACK_SIZE 256 //cc: 130 default:256?
-//#define PIOS_MAVLINK_STACK_SIZE         600   //cc: 600 default:800
-//#define PIOS_COMUSBBRIDGE_STACK_SIZE    280   //cc: 280 default:384
+#define PIOS_ACTUATOR_STACK_SIZE        800
+#define PIOS_MANUAL_STACK_SIZE          600
+#define PIOS_SYSTEM_STACK_SIZE          660
+#define PIOS_STABILIZATION_STACK_SIZE   524
+#define PIOS_TELEM_STACK_SIZE           500
+#define PIOS_EVENTDISPATCHER_STACK_SIZE 130
+#define PIOS_MAVLINK_STACK_SIZE         600
+#define PIOS_COMUSBBRIDGE_STACK_SIZE    280
 #define IDLE_COUNTS_PER_SEC_AT_NO_LOAD 1995998
 
 // This can't be too high to stop eventdispatcher thread overflowing

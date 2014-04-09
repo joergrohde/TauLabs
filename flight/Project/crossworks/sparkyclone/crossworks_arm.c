@@ -5,7 +5,7 @@
 volatile void* __tbss_start__;
 
 // ---------------------------------------------------------
-#if 0
+#if 1
 
 typedef struct _hardfault_args_t {
   unsigned int r0;
@@ -21,6 +21,7 @@ typedef struct _hardfault_args_t {
 void hard_fault_handler_c (hardfault_args_t* hardfault_args)
 {
    for(;;) {
+     __asm("BKPT #0\n") ;
    }
 }
 
@@ -34,38 +35,50 @@ void HardFault_Handler(void)
         "B hard_fault_handler_c");
 }
 
-#endif
-
-// ---------------------------------------------------------
-
-#ifndef HAVE_ROUNDF
-float roundf (float x)
+void NMI_Handler(void) __attribute__((naked));
+void NMI_Handler(void)
 {
-   float t;
-   if (!isfinite (x))
-     return (x);
 
-   if (x >= 0.0) 
-    {
-      t = floorf (x);
-      if (t - x <= -0.5)
-	t += 1.0;
-      return (t);
-    } 
-   else 
-    {
-      t = floorf (-x);
-      if (t + x <= -0.5)
-	t += 1.0;
-      return (-t);
-    }
+  for(;;) {
+    __asm("BKPT #0\n") ;
+  }
 }
-#endif
 
-#ifndef HAVE_FLOORF
-long int lroundf (float x)
+void MemManage_Handler(void) __attribute__((naked));
+void MemManage_Handler(void)
 {
-  return (long int) roundf (x);
-}
-#endif
 
+  for(;;) {
+    __asm("BKPT #0\n") ;
+  }
+}
+
+void BusFault_Handler(void) __attribute__((naked));
+void BusFault_Handler(void)
+{
+
+  for(;;) {
+    __asm("BKPT #0\n") ;
+  }
+}
+
+
+void UsageFault_Handler(void) __attribute__((naked));
+void UsageFault_Handler(void)
+{
+
+  for(;;) {
+    __asm("BKPT #0\n") ;
+  }
+}
+
+void WWDG_IRQHandler(void) __attribute__((naked));
+void WWDG_IRQHandler(void)
+{
+
+  for(;;) {
+    __asm("BKPT #0\n") ;
+  }
+}
+
+#endif
