@@ -70,7 +70,7 @@
           <file file_name="flight/targets/naze32/fw/Makefile" />
         </folder>
         <folder Name="board-info">
-          <file file_name="flight/targets/naze32/board-info/cmsis_system.c" />
+          <file file_name="flight/targets/naze32/board-info/system_stm32f10x.c" />
           <file file_name="flight/targets/naze32/board-info/board_hw_defs.c">
             <configuration Name="Common" build_exclude_from_build="Yes" />
           </file>

@@ -46,6 +46,82 @@
 #include "modulesettings.h"
 
 /**
+ * Configuration for the HMC5883L chip
+ */
+#if defined(PIOS_INCLUDE_HMC5883)
+#include "pios_hmc5883_priv.h"
+static struct pios_exti_cfg pios_exti_hmc5883_cfg __exti_config = {
+	// MAG_DRDY output on rev4 hardware (PB12)
+	.vector = PIOS_HMC5883_IRQHandler,
+	.line = EXTI_Line12,
+	.pin = {
+		.gpio = GPIOB,
+		.init = {
+			.GPIO_Pin = GPIO_Pin_12,
+			.GPIO_Speed = GPIO_Speed_2MHz,
+			.GPIO_Mode = GPIO_Mode_IN_FLOATING,
+		},
+	},
+	.irq = {
+		.init = {
+			.NVIC_IRQChannel = EXTI15_10_IRQn,
+			.NVIC_IRQChannelPreemptionPriority = PIOS_IRQ_PRIO_LOW,
+			.NVIC_IRQChannelSubPriority = 0,
+			.NVIC_IRQChannelCmd = ENABLE,
+		},
+	},
+	.exti = {
+		.init = {
+			.EXTI_Line = EXTI_Line12, // matches above GPIO pin
+			.EXTI_Mode = EXTI_Mode_Interrupt,
+			.EXTI_Trigger = EXTI_Trigger_Rising,
+			.EXTI_LineCmd = ENABLE,
+		},
+	},
+};
+
+static struct pios_exti_cfg pios_exti_hmc5883_cfg_v5 __exti_config = {
+        // MAG_DRDY output on rev5 hardware PC14
+	.vector = PIOS_HMC5883_IRQHandler,
+	.line = EXTI_Line14,
+	.pin = {
+		.gpio = GPIOC,
+		.init = {
+			.GPIO_Pin = GPIO_Pin_14,
+			.GPIO_Speed = GPIO_Speed_2MHz,
+			.GPIO_Mode = GPIO_Mode_IN_FLOATING,
+		},
+	},
+	.irq = {
+		.init = {
+			.NVIC_IRQChannel = EXTI15_10_IRQn,
+			.NVIC_IRQChannelPreemptionPriority = PIOS_IRQ_PRIO_LOW,
+			.NVIC_IRQChannelSubPriority = 0,
+			.NVIC_IRQChannelCmd = ENABLE,
+		},
+	},
+	.exti = {
+		.init = {
+			.EXTI_Line = EXTI_Line14, // matches above GPIO pin
+			.EXTI_Mode = EXTI_Mode_Interrupt,
+			.EXTI_Trigger = EXTI_Trigger_Rising,
+			.EXTI_LineCmd = ENABLE,
+		},
+	},
+};
+
+static /*const*/ struct pios_hmc5883_cfg pios_hmc5883_cfg = {
+	.exti_cfg = &pios_exti_hmc5883_cfg,
+	.M_ODR = PIOS_HMC5883_ODR_75,
+	.Meas_Conf = PIOS_HMC5883_MEASCONF_NORMAL,
+	.Gain = PIOS_HMC5883_GAIN_1_9,
+	.Mode = PIOS_HMC5883_MODE_CONTINUOUS,
+	.Default_Orientation = PIOS_HMC5883_TOP_90DEG,  // TODO: check & fix orientation
+};
+
+#endif /* PIOS_INCLUDE_HMC5883 */
+
+/**
  * Configuration for the MS5611 chip
  */
 #if defined(PIOS_INCLUDE_MS5611)
@@ -64,6 +140,7 @@ static const struct pios_ms5611_cfg pios_ms5611_cfg = {
 //#define PIOS_MPU6050_I2C_ADDR PIOS_MPU6050_I2C_ADD_A0_HIGH
 #define PIOS_MPU6050_I2C_ADDR PIOS_MPU6050_I2C_ADD_A0_LOW
 static const struct pios_exti_cfg pios_exti_mpu6050_cfg __exti_config = {
+	// MPU_INT output on rev4 hardware (PB13)
 	.vector = PIOS_MPU6050_IRQHandler,
 	.line = EXTI_Line13,
 	.pin = {
@@ -92,7 +169,37 @@ static const struct pios_exti_cfg pios_exti_mpu6050_cfg __exti_config = {
 	},
 };
 
-static const struct pios_mpu60x0_cfg pios_mpu6050_cfg = {
+static const struct pios_exti_cfg pios_exti_mpu6050_cfg_v5 __exti_config = {
+	// MPU_INT output on rev5 hardware (PC13)
+	.vector = PIOS_MPU6050_IRQHandler,
+	.line = EXTI_Line13,
+	.pin = {
+		.gpio = GPIOC,
+		.init = {
+			.GPIO_Pin   = GPIO_Pin_13,
+			.GPIO_Speed = GPIO_Speed_2MHz,
+			.GPIO_Mode  = GPIO_Mode_IN_FLOATING,
+		},
+	},
+	.irq = {
+		.init = {
+			.NVIC_IRQChannel = EXTI15_10_IRQn,
+			.NVIC_IRQChannelPreemptionPriority = PIOS_IRQ_PRIO_HIGH,
+			.NVIC_IRQChannelSubPriority = 0,
+			.NVIC_IRQChannelCmd = ENABLE,
+		},
+	},
+	.exti = {
+		.init = {
+			.EXTI_Line = EXTI_Line13, // matches above GPIO pin
+			.EXTI_Mode = EXTI_Mode_Interrupt,
+			.EXTI_Trigger = EXTI_Trigger_Rising,
+			.EXTI_LineCmd = ENABLE,
+		},
+	},
+};
+
+static /*const*/ struct pios_mpu60x0_cfg pios_mpu6050_cfg = {
 	.exti_cfg = &pios_exti_mpu6050_cfg,
 	.default_samplerate = 400,
 	.interrupt_cfg = PIOS_MPU60X0_INT_CLR_ANYRD,
@@ -187,9 +294,9 @@ static void PIOS_Board_configure_com (const struct pios_usart_cfg *usart_port_cf
  * 1 pulse - MPU6050 - no irq
  * 2 pulses - MPU6050 - failed configuration or task starting
  * 3 pulses - internal I2C bus locked
- * 4 pulses - external I2C bus locked
+ * 4 pulses - ms5611
  * 5 pulses - flash
- * 6 pulses - CAN
+ * 6 pulses - hmc5883l
  */
 void panic(int32_t code) {
 	while(1){
@@ -216,12 +323,23 @@ void panic(int32_t code) {
  * called from System/openpilot.c
  */
 
-#include <pios_board_info.h>
+//#include <pios_board_info.h>
+//from flight/targets/naze32/board-info/system_stm32f10x.c
+extern uint32_t hse_value;
 
 void PIOS_Board_Init(void) {
 
 	/* Delay system */
 	PIOS_DELAY_Init();
+
+	bool board_v5;
+	if (hse_value == 12000000)
+ 		board_v5 = true;
+	else
+		board_v5 = false;
+
+	//TODO: Buzzer
+	//rev5 needs inverted beeper. 
 
 	//const struct pios_board_info * bdinfo = &pios_board_info_blob;
 
@@ -429,6 +547,11 @@ void PIOS_Board_Init(void) {
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
 #if defined(PIOS_INCLUDE_MPU6050)
+	if(board_v5) { 
+		// rev5 hardware use PC13 instead of PB13 for MPU_INT
+		pios_mpu6050_cfg.exti_cfg = &pios_exti_mpu6050_cfg_v5;
+	}
+
 	if (PIOS_MPU6050_Init(pios_i2c_internal_id, PIOS_MPU6050_I2C_ADD_A0_LOW, &pios_mpu6050_cfg) != 0)
 		panic(2);
 	if (PIOS_MPU6050_Test() != 0)
@@ -474,9 +597,18 @@ void PIOS_Board_Init(void) {
 	PIOS_WDG_Clear();
 
 #if defined(PIOS_INCLUDE_MS5611)
-	PIOS_MS5611_Init(&pios_ms5611_cfg, pios_i2c_internal_id);
+	if (PIOS_MS5611_Init(&pios_ms5611_cfg, pios_i2c_internal_id) != 0)
+		panic(4);
 	if (PIOS_MS5611_Test() != 0)
 		panic(4);
+#endif
+
+#if defined(PIOS_INCLUDE_HMC5883)
+	//TODO: if(board_v5) { /* use PC14 instead of PB12 for MAG_DRDY (exti) */ }
+	if (PIOS_HMC5883_Init(pios_i2c_internal_id, &pios_hmc5883_cfg) != 0)
+		panic(6);
+        if (PIOS_HMC5883_Test() != 0)
+		panic(6);
 #endif
 
 #if defined(PIOS_INCLUDE_GPIO)

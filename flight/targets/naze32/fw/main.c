@@ -45,7 +45,7 @@ extern void Stack_Change(void);
 
 /* Local Variables */
 #define INIT_TASK_PRIORITY	(tskIDLE_PRIORITY + configMAX_PRIORITIES - 1)	// max priority
-#define INIT_TASK_STACK		(600 / 4)										// XXX this seems excessive
+#define INIT_TASK_STACK		(640 / 4)
 static xTaskHandle initTaskHandle;
 
 /* Function Prototypes */
@@ -53,6 +53,9 @@ static void initTask(void *parameters);
 
 /* Prototype of generated InitModules() function */
 extern void InitModules(void);
+
+/* board-info/system_stm32f10x.c */
+extern void SetSysClock(void);
 
 /**
 * Tau Labs Main function:
@@ -73,6 +76,10 @@ int main()
 
 	/* Brings up System using CMSIS functions, enables the LEDs. */
 	PIOS_SYS_Init();
+
+	// Configure the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers
+	// Configure the Flash Latency cycles and enable prefetch buffer
+	SetSysClock();
 
 	/* use a FreeRTOS task to bring up the system so we can */
 	/* always rely on FreeRTOS primitive */

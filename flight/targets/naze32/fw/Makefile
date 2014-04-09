@@ -287,7 +287,8 @@ SRC += $(MATHLIB)/pid.c
 
 ## CMSIS for STM32
 include $(PIOSCOMMONLIB)/CMSIS3/library.mk
-SRC += $(BOARD_INFO_DIR)/cmsis_system.c
+#SRC += $(BOARD_INFO_DIR)/cmsis_system.c
+SRC += $(BOARD_INFO_DIR)/system_stm32f10x.c
 
 ## Used parts of the STM-Library
 SRC += $(STMSPDSRCDIR)/stm32f10x_adc.c

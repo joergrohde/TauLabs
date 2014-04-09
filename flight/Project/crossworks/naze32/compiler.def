@@ -2,6 +2,8 @@
 -imacros./flight/Project/crossworks/naze32/board-info.def
 -Dasm=__asm
 -DM_PI=3.14159265358979323846f
+-Dlroundf(x)=(((long int)((x)>0?(x)+.5f:(x)-.5f)))
+-Droundf(x)=((float)lroundf(x))
 -I./flight/PiOS/Common/Libraries/CMSIS3/Include
 -I./shared/api
 -I./flight/UAVTalk

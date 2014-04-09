@@ -82,37 +82,3 @@ void WWDG_IRQHandler(void)
 }
 
 #endif
-
-// ---------------------------------------------------------
-
-#ifndef HAVE_ROUNDF
-float roundf (float x)
-{
-   float t;
-   if (!isfinite (x))
-     return (x);
-
-   if (x >= 0.0) 
-    {
-      t = floorf (x);
-      if (t - x <= -0.5)
-	t += 1.0;
-      return (t);
-    } 
-   else 
-    {
-      t = floorf (-x);
-      if (t + x <= -0.5)
-	t += 1.0;
-      return (-t);
-    }
-}
-#endif
-
-#ifndef HAVE_FLOORF
-long int lroundf (float x)
-{
-  return (long int) roundf (x);
-}
-#endif
-
