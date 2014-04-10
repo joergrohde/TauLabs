@@ -58,7 +58,7 @@ NAVIGATION ?= NO
 # @startgroup  Optional modules
 # @groupbrief Optional module and driver defaults
 USE_CAMERASTAB ?= YES
-USE_GPS ?= YES
+USE_GPS ?= NO
 USE_TXPID ?= YES
 USE_ALTITUDE ?= NO
 USE_AUTOTUNE ?= YES
