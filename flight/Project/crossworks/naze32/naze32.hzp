@@ -264,7 +264,10 @@
             <configuration Name="Common" build_exclude_from_build="Yes" />
           </file>
           <file file_name="flight/PiOS/STM32F10x/pios_servo.c" />
-          <file file_name="flight/PiOS/STM32F10x/pios_i2c.c" />
+          <file file_name="flight/PiOS/STM32F10x/pios_i2c.c">
+            <configuration Name="Common" build_exclude_from_build="Yes" />
+          </file>
+          <file file_name="flight/PiOS/STM32F10x/pios_i2c_alt.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_spi.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_ppm.c" />
           <file file_name="flight/PiOS/STM32F10x/pios_pwm.c" />
